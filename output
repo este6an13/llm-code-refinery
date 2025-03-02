@@ -1,0 +1,5469 @@
+
+
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digits_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    # Filter numbers whose digit sum is 30
+    valid_numbers = [num for num in numbers if digits_sum(num) == 30]
+
+    if not valid_numbers:
+        return 0  # or raise an exception, depending on requirements
+
+    smallest = min(valid_numbers)
+    largest = max(valid_numbers)
+
+    return largest - smallest
+
+# Example usage:
+import random
+
+# Generating a list of 1 million random numbers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digits_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    smallest = None
+    largest = None
+
+    for num in numbers:
+        if digits_sum(num) == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is None or largest is None:
+        return 0  # or raise an exception, depending on requirements
+
+    return largest - smallest
+
+# Example usage:
+import random
+
+# Generating a list of 1 million random numbers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+Final Solution:
+def get_difference(numbers):
+    def digits_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    smallest = float('inf')
+    largest = -float('inf')
+
+    for num in numbers:
+        if digits_sum(num) == 30:
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    if smallest == float('inf') or largest == -float('inf'):
+        return 0  # or raise an exception, depending on requirements
+
+    return largest - smallest
+
+# Example usage:
+import random
+
+# Generating a list of 1 million random numbers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(random_numbers)
+print(difference)
+Solution saved to 1_3_inf_1.py
+
+Average time per generation: 14.63 seconds
+
+
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    # Filter numbers whose digits sum to 30
+    valid_numbers = [n for n in numbers if digit_sum(n) == 30]
+
+    if not valid_numbers:
+        return 0  # or any appropriate value if no numbers meet the criteria
+
+    # Find the smallest and largest numbers in valid_numbers
+    min_num = min(valid_numbers)
+    max_num = max(valid_numbers)
+
+    # Return the difference
+    return max_num - min_num
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    # Initialize min and max to None
+    min_num = None
+    max_num = None
+
+    for n in numbers:
+        if digit_sum(n) == 30:
+            if min_num is None or n < min_num:
+                min_num = n
+            if max_num is None or n > max_num:
+                max_num = n
+
+    # If no numbers meet the criteria, return 0
+    if min_num is None or max_num is None:
+        return 0
+
+    return max_num - min_num
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n, cache):
+    if n not in cache:
+        cache[n] = sum(int(digit) for digit in str(n))
+    return cache[n]
+
+def get_difference(numbers):
+    # Initialize min and max to None
+    min_num = None
+    max_num = None
+    # Cache to store computed digit sums
+    cache = {}
+
+    for n in numbers:
+        if digit_sum(n, cache) == 30:
+            if min_num is None:
+                min_num = n
+            # For max_num and min_num use built-in `max` and `min` check
+            else:
+                min_num = min(min_num, n)
+                max_num = max(max_num or n, n)
+
+    # If no numbers meet the criteria, return 0
+    if min_num is None or max_num is None:
+        return 0
+
+    return max_num - min_num
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n, cache):
+    # Calculate digit sum or retrieve from cache
+    if n not in cache:
+        cache[n] = sum(int(digit) for digit in str(n))
+    return cache[n]
+
+def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+    cache = {}
+    found = False
+
+    for n in numbers:
+        if digit_sum(n, cache) == 30:
+            # Update min and max only when a valid number is found
+            min_num = min(min_num, n)
+            max_num = max(max_num, n)
+            found = True
+
+    # If no numbers meet the criteria, return 0
+    return max_num - min_num if found else 0
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    # Compute the digit sum without caching since numbers in range 1 to 100,000 can't be reused
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for n in numbers:
+        if digit_sum(n) == 30:
+            # Update min and max only when a valid number is found
+            if n < min_num:
+                min_num = n
+            if n > max_num:
+                max_num = n
+
+    # Calculate the difference if valid numbers are found
+    return max_num - min_num if min_num != float('inf') else 0
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    # Iterate through each number in the list
+    for n in numbers:
+        # Inline calculation of digit sum to avoid function call overhead
+        digit_sum = 0
+        tmp = n
+        while tmp > 0:
+            tmp, digit = divmod(tmp, 10)
+            digit_sum += digit
+
+        # Check if the digit sum equals 30
+        if digit_sum == 30:
+            # Update min and max only when a valid number is found
+            if n < min_num:
+                min_num = n
+            if n > max_num:
+                max_num = n
+
+    # Calculate the difference if any valid numbers are found
+    return max_num - min_num if min_num != float('inf') else 0
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    # Iterate through each number in the list
+    for n in numbers:
+        # Inline calculation of digit sum
+        digit_sum = 0
+        tmp = n
+        while tmp > 0:
+            tmp, digit = divmod(tmp, 10)
+            digit_sum += digit
+
+        # Check if the digit sum equals 30
+        if digit_sum == 30:
+            # Update min and max only when a valid number is found
+            if n < min_num:
+                min_num = n
+            if n > max_num:
+                max_num = n
+
+    # Calculate the difference if any valid numbers are found
+    return max_num - min_num if min_num != float('inf') else 0
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(numbers)
+print(difference)
+
+Final Solution:
+def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for n in numbers:
+        # Calculate the sum of the digits
+        digit_sum = sum(int(digit) for digit in str(n))
+
+        # Check if the digit sum equals 30
+        if digit_sum == 30:
+            # Update min and max only when a valid number is found
+            min_num = min(min_num, n)
+            max_num = max(max_num, n)
+
+    # Calculate the difference if any valid numbers are found
+    return max_num - min_num if min_num != float('inf') else 0
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Calculate the difference
+difference = get_difference(numbers)
+print(difference)
+Solution saved to 1_8_inf_1.py
+
+Average time per generation: 14.05 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        """Helper function to calculate the sum of digits of a number."""
+        return sum(int(digit) for digit in str(n))
+
+    # Filter numbers whose digits sum to 30
+    valid_numbers = [num for num in numbers if digit_sum(num) == 30]
+
+    if not valid_numbers:
+        # If no numbers have digit sum of 30, return 0 or handle accordingly
+        return 0
+
+    # Find the minimum and maximum of the valid numbers
+    min_valid = min(valid_numbers)
+    max_valid = max(valid_numbers)
+
+    # Return the difference
+    return max_valid - min_valid
+
+# Example usage:
+# numbers = [some list of 1 million random integers between 1 and 100,000]
+# difference = get_difference(numbers)
+# print(difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        """Compute sum of digits of an integer using arithmetic."""
+        total = 0
+        while n:
+            total, n = total + n % 10, n // 10
+        return total
+
+    min_valid = None
+    max_valid = None
+
+    for num in numbers:
+        if digit_sum(num) == 30:
+            if min_valid is None or num < min_valid:
+                min_valid = num
+            if max_valid is None or num > max_valid:
+                max_valid = num
+
+    if min_valid is None or max_valid is None:
+        # If no numbers were found, return 0.
+        return 0
+
+    # Return the difference
+    return max_valid - min_valid
+
+# Example usage:
+# numbers = [your array of numbers]
+# difference = get_difference(numbers)
+# print(difference)
+
+Final Solution:
+def get_difference(numbers):
+    def digit_sum(n):
+        """Compute sum of digits of an integer using arithmetic."""
+        total = 0
+        while n:
+            total += n % 10
+            n //= 10
+        return total
+
+    min_valid = float('inf')  # Use infinity to simplify the checking process
+    max_valid = float('-inf') # Use negative infinity
+
+    for num in numbers:
+        if digit_sum(num) == 30:
+            if num < min_valid:
+                min_valid = num
+            if num > max_valid:
+                max_valid = num
+
+    if min_valid == float('inf') or max_valid == float('-inf'):
+        # If no numbers were found with the digit sum of 30, return 0.
+        return 0
+
+    # Return the difference
+    return max_valid - min_valid
+
+# Example usage:
+# numbers = [your array of numbers]
+# difference = get_difference(numbers)
+# print(difference)
+Solution saved to 2_3_inf_1.py
+
+Average time per generation: 15.17 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def sum_of_digits(number):
+    """Helper function to compute the sum of digits of a number."""
+    return sum(int(digit) for digit in str(number))
+
+def get_difference(numbers):
+    """Returns the difference between the largest and smallest numbers
+    in the list whose digits sum up to 30."""
+
+    min_num = float('inf')  # Initialize to positive infinity for comparision
+    max_num = float('-inf') # Initialize to negative infinity for comparision
+
+    for number in numbers:
+        if sum_of_digits(number) == 30:
+            if number < min_num:
+                min_num = number
+            if number > max_num:
+                max_num = number
+
+    # If no numbers with digits summing to 30 are found, return an appropriate value
+    if min_num == float('inf') or max_num == float('-inf'):
+        return 0 # Return 0 or handle as per specific requirements of the problem
+
+    return max_num - min_num
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def sum_of_digits(number):
+    """Optimized helper function to compute the sum of digits of a number."""
+    digit_sum = 0
+    while number > 0:
+        digit_sum += number % 10
+        number //= 10
+    return digit_sum
+
+def get_difference(numbers):
+    """Optimized version: Returns the difference between the largest and smallest numbers
+    in the list whose digits sum up to 30."""
+
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for number in numbers:
+        if sum_of_digits(number) == 30:
+            if number < min_num:
+                min_num = number
+            if number > max_num:
+                max_num = number
+
+    if min_num == float('inf') or max_num == float('-inf'):
+        return 0
+
+    return max_num - min_num
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def sum_of_digits(number):
+    """Optimized helper function to compute the sum of digits of a number."""
+    digit_sum = 0
+    while number:
+        digit_sum += number % 10
+        number //= 10
+    return digit_sum
+
+def get_difference(numbers):
+    """Returns the difference between the largest and smallest numbers in the list
+    whose digits sum up to 30."""
+
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for number in numbers:
+        if sum_of_digits(number) == 30:
+            if number < min_num:
+                min_num = number
+            if number > max_num:
+                max_num = number
+
+    # If min_num wasn't updated, it means no number in the list has a digit sum of 30
+    if min_num == float('inf'):
+        return 0
+
+    return max_num - min_num
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Returns the difference between the largest and smallest numbers in the list
+    whose digits sum up to 30."""
+
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for number in numbers:
+        current = number
+        digit_sum = 0
+        # Inlining sum_of_digits calculation
+        while current:
+            digit_sum += current % 10
+            current //= 10
+
+        if digit_sum == 30:
+            if number < min_num:
+                min_num = number
+            if number > max_num:
+                max_num = number
+
+            # If both extremes are found, you could add an exit condition if there are constraints on this.
+            # But in case of 1 million elements, this loop is designed to check all elements once for consistent min/max.
+
+    # If min_num wasn't updated, it means no number in the list has a digit sum of 30
+    if min_num == float('inf'):
+        return 0
+
+    return max_num - min_num
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Returns the difference between the largest and smallest numbers
+    whose digits sum up to 30."""
+
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for number in numbers:
+        current = number
+        digit_sum = 0
+        while current:
+            digit_sum += current % 10
+            current //= 10
+
+        if digit_sum == 30:
+            if number < min_num:
+                min_num = number
+            if number > max_num:
+                max_num = number
+
+    if min_num == float('inf'):
+        return 0
+
+    return max_num - min_num
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Returns the difference between the largest and smallest numbers
+    whose digits sum up to exactly 30."""
+
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for number in numbers:
+        digit_sum = 0
+        current = number
+
+        # Calculate the sum of digits of the current number
+        while current > 0:
+            digit_sum += current % 10
+            current //= 10
+
+        # Check if the sum of digits equals 30
+        if digit_sum == 30:
+            # Update minimum and maximum numbers if needed
+            if number < min_num:
+                min_num = number
+            if number > max_num:
+                max_num = number
+
+    # If no valid number found, handle case appropriately
+    if min_num == float('inf'):
+        return 0  # Or handle based on specific problem requirements
+
+    return max_num - min_num
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Returns the difference between the largest and smallest numbers
+    whose digits sum up to exactly 30."""
+
+    min_num = None
+    max_num = None
+
+    for number in numbers:
+        digit_sum = 0
+        current = number
+
+        # Calculate the sum of digits of the current number
+        while current > 0:
+            digit_sum += current % 10
+            current //= 10
+
+        # Check if the sum of digits equals 30
+        if digit_sum == 30:
+            # Update minimum and maximum numbers if needed
+            if min_num is None or number < min_num:
+                min_num = number
+            if max_num is None or number > max_num:
+                max_num = number
+
+    # If no valid number found, return 0 or handle appropriately
+    if min_num is None:  # This means no number was found with digit sum 30
+        return 0
+
+    return max_num - min_num
+
+
+Final Solution:
+def get_difference(numbers):
+    """Returns the difference between the largest and smallest numbers
+    whose digits sum up to exactly 30."""
+
+    min_num, max_num = float('inf'), float('-inf')
+
+    for number in numbers:
+        # Calculate the digit sum using arithmetic, which is already efficient
+        digit_sum = sum(int(char) for char in str(number))
+
+        # If the digit sum equals 30, consider the number for min/max update
+        if digit_sum == 30:
+            if number < min_num:
+                min_num = number
+            if number > max_num:
+                max_num = number
+
+    # If no valid number found, return 0 or handle appropriately
+    if min_num == float('inf'):
+        return 0
+
+    return max_num - min_num
+
+Solution saved to 2_8_inf_1.py
+
+Average time per generation: 18.19 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for num in numbers:
+        if digit_sum(num) == 30:
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    # If no numbers were found with digit sum 30
+    if min_num == float('inf') or max_num == float('-inf'):
+        return 0
+
+    return max_num - min_num
+
+# Example usage (assuming the list is defined as `numbers`):
+# numbers = [random list of integers]
+# result = get_difference(numbers)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for num in numbers:
+        # Calculate the digit sum directly within the loop
+        n = num
+        digit_sum = 0
+        while n > 0:
+            digit_sum += n % 10
+            n //= 10
+
+        if digit_sum == 30:
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    # If no numbers were found with digit sum 30
+    if min_num == float('inf') or max_num == float('-inf'):
+        return 0
+
+    return max_num - min_num
+
+# Example usage (assuming the list is defined as `numbers`):
+# numbers = [list of integers]
+# result = get_difference(numbers)
+
+Final Solution:
+def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for num in numbers:
+        # Calculate the digit sum directly within the loop
+        n = num
+        digit_sum = 0
+        while n > 0:
+            digit_sum += n % 10
+            n //= 10
+
+        if digit_sum == 30:
+            # Update min and max without separate conditions for potential speed improvement
+            min_num = min(min_num, num)
+            max_num = max(max_num, num)
+
+    # If no numbers with a digit sum of 30 were found
+    if min_num == float('inf'):
+        return 0
+
+    return max_num - min_num
+
+# Example usage (assuming the list is defined as `numbers`):
+# numbers = [list of integers]
+# result = get_difference(numbers)
+Solution saved to 3_3_inf_1.py
+
+Average time per generation: 11.96 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        if sum(int(digit) for digit in str(number)) == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If we found at least one number with sum of digits = 30
+    if min_number != float('inf') and max_number != float('-inf'):
+        return max_number - min_number
+    else:
+        # If no number found, return a specific value like 0, or raise an exception
+        return 0
+
+# Example usage:
+# Assuming `random_numbers` is a list of 1 million random integers between 1 and 100000,
+# you would call the function like this:
+# difference = get_difference(random_numbers)
+# print(difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        digit_sum = 0
+        n = number
+
+        while n > 0:
+            digit_sum += n % 10
+            n //= 10
+
+        if digit_sum == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+            # Optimization with early exit:
+            # If min and max are found in the same iteration (unlikely, but possible in edge cases),
+            # you could potentially exit early if this meets some criteria of your problem.
+
+    # Check for at least one valid number
+    if min_number != float('inf') and max_number != float('-inf'):
+        return max_number - min_number
+    else:
+        return 0
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_number = float('inf')
+    max_number = float('-inf')
+    found = False  # To track if we've found any valid numbers
+
+    for number in numbers:
+        digit_sum = sum(int(digit) for digit in str(number))  # Streamlined digit sum calculation
+
+        if digit_sum == 30:
+            found = True
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+            # If desired, one can try an early exit strategy if it's informed by a problem condition.
+            # For instance, if both min and max have been found even once, and they are a known specific pair,
+            # you could exit. But this needs a known condition.
+
+    # Check for at least one valid number
+    if found:
+        return max_number - min_number
+    else:
+        return 0
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def generate_numbers_with_digit_sum(target_sum, max_value):
+    valid_numbers = set()
+
+    def backtrack(current_number, current_sum, start_digit):
+        if current_number <= max_value and current_sum == target_sum:
+            valid_numbers.add(current_number)
+            return
+        elif current_number > max_value or current_sum > target_sum:
+            return
+
+        for digit in range(start_digit, 10):
+            next_number = current_number * 10 + digit
+            backtrack(next_number, current_sum + digit, digit)
+
+    backtrack(0, 0, 1)
+    return valid_numbers
+
+def get_difference(numbers):
+    max_value = 100000
+    target_digit_sum = 30
+    valid_numbers = generate_numbers_with_digit_sum(target_digit_sum, max_value)
+
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        if number in valid_numbers:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    if min_number != float('inf') and max_number != float('-inf'):
+        return max_number - min_number
+    else:
+        return 0
+
+# Example usage:
+# numbers_list = ... (a list of 1 million numbers)
+# print(get_difference(numbers_list))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    target_digit_sum = 30
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        # Calculate digit sum
+        digit_sum = sum(int(digit) for digit in str(number))
+
+        if digit_sum == target_digit_sum:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    if min_number != float('inf') and max_number != float('-inf'):
+        return max_number - min_number
+    else:
+        return 0
+
+# Example usage:
+# numbers_list = ... (a list of 1 million numbers)
+# print(get_difference(numbers_list))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_digit_sum(n):
+    """Helper function to calculate the sum of digits of a number."""
+    s = 0
+    while n > 0:
+        s, n = s + n % 10, n // 10
+    return s
+
+def get_difference(numbers):
+    target_digit_sum = 30
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        # Calculate digit sum using a helper function to minimize str casting
+        digit_sum = get_digit_sum(number)
+
+        if digit_sum == target_digit_sum:
+            # Simultaneously update min and max in a single conditional block
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # Calculate the difference only if valid min and max numbers are found
+    if min_number != float('inf') and max_number != float('-inf'):
+        return max_number - min_number
+    else:
+        return 0
+
+# Example usage:
+# numbers_list = ... (a list of 1 million numbers)
+# print(get_difference(numbers_list))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_digit_sum(n):
+    """Calculate the sum of digits of a number."""
+    s = 0
+    while n > 0:
+        s, n = s + n % 10, n // 10
+    return s
+
+def get_difference(numbers):
+    target_digit_sum = 30
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        # Calculate digit sum efficiently without casting to string
+        digit_sum = get_digit_sum(number)
+
+        if digit_sum == target_digit_sum:
+            # Update min and max values found
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # Calculate the difference only if valid min and max numbers are found
+    if min_number != float('inf') and max_number != float('-inf'):
+        return max_number - min_number
+    else:
+        return 0
+
+# Example usage:
+# numbers_list = ... (a list of 1 million numbers)
+# print(get_difference(numbers_list))
+
+Final Solution:
+def get_digit_sum(n):
+    """Calculate the sum of digits of a number."""
+    s = 0
+    while n > 0:
+        s, n = s + n % 10, n // 10
+    return s
+
+def get_difference(numbers):
+    target_digit_sum = 30
+    min_number = None
+    max_number = None
+
+    for number in numbers:
+        # Calculate digit sum without casting to string
+        digit_sum = get_digit_sum(number)
+
+        if digit_sum == target_digit_sum:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # Calculate the difference only if valid min and max numbers are found
+    if min_number is not None and max_number is not None:
+        return max_number - min_number
+    else:
+        return 0
+
+# Example usage:
+# numbers_list = ... (a list of 1 million numbers)
+# print(get_difference(numbers_list))
+Solution saved to 3_8_inf_1.py
+
+Average time per generation: 19.06 seconds
+
+
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 45.61 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Returns the sum of digits of a given integer n."""
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    """Finds the difference between the smallest and largest numbers
+       in a list whose digits sum up to 30."""
+
+    # Filter numbers with digit sum equal to 30
+    filtered_numbers = [number for number in numbers if digit_sum(number) == 30]
+
+    # If no numbers found, return 0 as there's no difference to calculate
+    if not filtered_numbers:
+        return 0
+
+    # Find min and max of the filtered numbers
+    min_number = min(filtered_numbers)
+    max_number = max(filtered_numbers)
+
+    # Return the difference
+    return max_number - min_number
+
+# Example usage:
+
+import random
+
+# Generate a list of 1 million random integers between 1 and 100000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Get the difference between the smallest and largest numbers whose digits sum up to 30
+difference = get_difference(random_numbers)
+
+print("The difference is:", difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 30.94 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Finds the difference between the smallest and largest numbers
+       in a list whose digits sum up to 30."""
+
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        # Calculate the digit sum directly in the loop
+        digit_sum = 0
+        n = number
+        while n > 0:
+            digit_sum += n % 10
+            n //= 10
+
+        if digit_sum == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If no numbers found with digit sum 30, return 0
+    if min_number == float('inf') and max_number == float('-inf'):
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+
+import random
+
+# Generate a list of 1 million random integers between 1 and 100000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Get the difference between the smallest and largest numbers whose digits sum up to 30
+difference = get_difference(random_numbers)
+
+print("The difference is:", difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 15.07 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Finds the difference between the smallest and largest numbers
+       in a list whose digits sum up to 30."""
+
+    min_number = float('inf')
+    max_number = -1  # Start with -1 as no number can be smaller
+
+    for number in numbers:
+        digit_sum = 0
+        n = number
+        while n > 0:
+            digit_sum += n % 10
+            n //= 10
+
+        if digit_sum == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If no numbers found with digit sum 30, return 0
+    if max_number == -1:  # If min_number is unchanged no max was found
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+
+import random
+
+# Generate a list of 1 million random integers between 1 and 100000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Get the difference between the smallest and largest numbers whose digits sum up to 30
+difference = get_difference(random_numbers)
+
+print("The difference is:", difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 0.86 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Finds the difference between the smallest and largest numbers
+       in a list whose digits sum up to 30."""
+
+    min_number = float('inf')
+    max_number = -1  # Use -1 to indicate no number found initially
+
+    for number in numbers:
+        digit_sum = 0
+        n = number
+
+        # Calculate digit sum
+        while n > 0:
+            digit_sum += n % 10
+            if digit_sum > 30:  # Early exit if digit sum exceeds 30
+                break
+            n //= 10
+
+        # Check if the sum of digits equals 30
+        if digit_sum == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If no numbers found with digit sum 30, return 0
+    if max_number == -1:
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Get the difference between the smallest and largest numbers whose digits sum up to 30
+difference = get_difference(random_numbers)
+
+print("The difference is:", difference)
+
+Time limit reached: 60 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    """Finds the difference between the smallest and largest numbers
+       in a list whose digits sum up to 30."""
+
+    min_number = None
+    max_number = None
+
+    for number in numbers:
+        digit_sum = 0
+        n = number
+
+        # Calculate digit sum
+        while n > 0:
+            digit_sum += n % 10
+            if digit_sum > 30:  # Early exit if digit sum exceeds 30
+                break
+            n //= 10
+
+        # Check if the sum of digits equals 30
+        if digit_sum == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # If no numbers found with digit sum 30, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+import random
+
+# Generate a list of 1 million random integers between 1 and 100000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Get the difference between the smallest and largest numbers whose digits sum up to 30
+difference = get_difference(random_numbers)
+
+print("The difference is:", difference)
+Solution saved to 1_inf_60_1.py
+
+Average time per generation: 19.80 seconds
+
+
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 107.24 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Helper function that calculates the sum of digits of a number
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    # Filter numbers whose digits add up to 30
+    filtered_numbers = [num for num in numbers if sum_of_digits(num) == 30]
+
+    # If no numbers found, return None or an appropriate value
+    if not filtered_numbers:
+        return None
+
+    # Calculate the smallest and largest numbers from the filtered list
+    smallest = min(filtered_numbers)
+    largest = max(filtered_numbers)
+
+    # Return the difference between the largest and smallest numbers
+    return largest - smallest
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 96.93 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        digits_sum = 0
+        while n > 0:
+            digits_sum += n % 10
+            n //= 10
+        return digits_sum
+
+    smallest, largest = float('inf'), float('-inf')
+    found = False
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            found = True
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    if not found:
+        return None
+
+    return largest - smallest
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 84.71 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        digits_sum = 0
+        while n > 0:
+            digits_sum += n % 10
+            n //= 10
+        return digits_sum
+
+    smallest, largest = None, None
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is None or largest is None:
+        return None
+
+    return largest - smallest
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 73.34 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+
+    smallest, largest = None, None
+
+    for num in numbers:
+        digit_sum = 0
+        n = num
+
+        while n > 0:
+            digit_sum += n % 10
+            if digit_sum > 30:  # Early exit if sum exceeds 30
+                break
+            n //= 10
+
+        if digit_sum == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is None or largest is None:
+        return None
+
+    return largest - smallest
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 60.33 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    smallest, largest = float('inf'), -float('inf')
+
+    for num in numbers:
+        digit_sum = 0
+        n = num
+
+        while n > 0:
+            digit_sum += n % 10
+            if digit_sum > 30:  # Early exit if the sum exceeds 30
+                break
+            n //= 10
+
+        if digit_sum == 30:
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    if smallest == float('inf') or largest == -float('inf'):
+        return None
+
+    return largest - smallest
+
+# Sample usage
+import random
+
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 49.98 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    smallest, largest = None, None
+
+    for num in numbers:
+        digit_sum = sum(int(digit) for digit in str(num))
+
+        if digit_sum == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is None or largest is None:
+        return None
+
+    return largest - smallest
+
+# Sample usage
+import random
+
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 39.63 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Helper function to calculate the sum of digits of a number
+    def sum_of_digits(n):
+        return sum(int(d) for d in str(n))
+
+    smallest = float('inf')
+    largest = float('-inf')
+    found = False  # Track if we've found any numbers with a digit sum of 30
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            found = True
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    if not found:
+        return None
+
+    return largest - smallest
+
+# Sample usage
+import random
+
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 27.40 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Pre-compute digit sums for numbers up to 100,000
+    digit_sum_to_numbers = {}
+
+    # Populate mapping of numbers to their digit sums
+    for num in range(100001):  # Since we're considering numbers within 1 to 100,000
+        digit_sum = sum(int(d) for d in str(num))
+        if digit_sum == 30:
+            if digit_sum not in digit_sum_to_numbers:
+                digit_sum_to_numbers[digit_sum] = []
+            digit_sum_to_numbers[digit_sum].append(num)
+
+    # Flatten the list of numbers with the desired digit sum
+    filtered_numbers = []
+    for num in numbers:
+        digit_sum = sum(int(d) for d in str(num))
+        if digit_sum == 30:
+            filtered_numbers.append(num)
+
+    if not filtered_numbers:
+        return None
+
+    # Use min and max to find the required smallest and largest numbers
+    smallest = min(filtered_numbers)
+    largest = max(filtered_numbers)
+
+    return largest - smallest
+
+# Sample usage
+import random
+
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 15.07 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Initialize variables to store the smallest and largest numbers
+    smallest = float('inf')
+    largest = float('-inf')
+    found = False
+
+    # Iterate over the numbers to find the smallest and largest with digit sum of 30
+    for num in numbers:
+        digit_sum = sum(int(d) for d in str(num))
+        if digit_sum == 30:
+            found = True
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    # If we found any numbers, return the difference
+    if found:
+        return largest - smallest
+    else:
+        return None
+
+# Sample usage
+import random
+
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+difference = get_difference(random_numbers)
+print(difference)
+
+Time limit reached: 120 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    smallest = float('inf')
+    largest = float('-inf')
+    found = False
+
+    # Pre-compute possible digits that sum up to 30
+    possible_digit_sums = {i for i in range(100000) if sum(int(d) for d in str(i)) == 30}
+
+    for num in numbers:
+        if num in possible_digit_sums:
+            found = True
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    return largest - smallest if found else None
+
+import random
+
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+difference = get_difference(random_numbers)
+print(difference)
+Solution saved to 1_inf_120_1.py
+
+Average time per generation: 13.96 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 43.26 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        """Calculate the sum of digits of n."""
+        return sum(int(d) for d in str(n))
+
+    # Filter numbers where the digit sum is 30
+    filtered_numbers = [n for n in numbers if digit_sum(n) == 30]
+
+    if not filtered_numbers:
+        return 0  # Assuming 0 if no such numbers are found
+
+    min_number = min(filtered_numbers)
+    max_number = max(filtered_numbers)
+
+    return max_number - min_number
+
+# Example usage:
+# numbers = [random integers between 1 and 100,000]
+# print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 34.26 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        """Calculate the sum of digits of n."""
+        return sum(int(d) for d in str(n))
+
+    min_number = None
+    max_number = None
+
+    for n in numbers:
+        if digit_sum(n) == 30:
+            if min_number is None or n < min_number:
+                min_number = n
+            if max_number is None or n > max_number:
+                max_number = n
+
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+# numbers = [random integers between 1 and 100,000]
+# print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 23.89 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        """Calculate the sum of digits of n."""
+        return sum(int(d) for d in str(n))
+
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for n in numbers:
+        if digit_sum(n) == 30:
+            if n < min_number:
+                min_number = n
+            if n > max_number:
+                max_number = n
+
+    if min_number == float('inf') or max_number == float('-inf'):
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+# numbers = [random integers between 1 and 100,000]
+# print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 11.12 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        """Calculate the sum of digits of n using integer arithmetic."""
+        s = 0
+        while n > 0:
+            s += n % 10
+            n //= 10
+        return s
+
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for n in numbers:
+        if digit_sum(n) == 30:
+            if n < min_number:
+                min_number = n
+            if n > max_number:
+                max_number = n
+
+    if min_number == float('inf'):
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+# numbers = [random integers between 1 and 100,000]
+# print(get_difference(numbers))
+
+Time limit reached: 60 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    def digit_sum(n):
+        """Calculate the sum of digits of n using integer arithmetic."""
+        s = 0
+        while n > 0:
+            s += n % 10
+            n //= 10
+        return s
+
+    min_number = max_number = None
+
+    for n in numbers:
+        if digit_sum(n) == 30:
+            if min_number is None:
+                min_number = max_number = n
+            else:
+                if n < min_number:
+                    min_number = n
+                elif n > max_number:
+                    max_number = n
+
+    if min_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage
+# numbers = [random integers between 1 and 100,000]
+# print(get_difference(numbers))
+Solution saved to 2_inf_60_1.py
+
+Average time per generation: 14.22 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 103.89 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_digit_sum(n):
+    """Helper function to calculate the sum of digits of an integer."""
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+    whose digits sum up to 30."""
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        if get_digit_sum(number) == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If no such numbers meet the criteria, return 0
+    if min_number == float('inf') or max_number == float('-inf'):
+        return 0
+
+    return max_number - min_number
+
+# Example usage (This part isn't necessary for the solution, just for testing purposes):
+# import random
+# random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 86.15 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_digit_sum(n):
+    """Helper function to calculate the sum of digits of an integer."""
+    digit_sum = 0
+    while n > 0:
+        digit_sum += n % 10
+        n //= 10
+    return digit_sum
+
+def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+    whose digits sum up to 30."""
+    min_number = None
+    max_number = None
+
+    for number in numbers:
+        if get_digit_sum(number) == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # If no such numbers meet the criteria, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage (This part isn't necessary for the solution, just for testing purposes):
+# import random
+# random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 68.82 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+    whose digits sum up to 30."""
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        # Calculate digit sum inline for faster execution
+        n = number
+        digit_sum = 0
+        while n > 0:
+            digit_sum += n % 10
+            n //= 10
+
+        if digit_sum == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If no such numbers meet the criteria, return 0
+    if min_number == float('inf') or max_number == float('-inf'):
+        return 0
+
+    return max_number - min_number
+
+# Example usage (This part isn't necessary for the solution, just for testing purposes):
+# import random
+# random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 55.04 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+    whose digits sum up to 30."""
+    min_number = None
+    max_number = None
+
+    for number in numbers:
+        # Calculate digit sum inline for faster execution
+        n = number
+        digit_sum = 0
+        while n > 0:
+            n, remainder = divmod(n, 10)
+            digit_sum += remainder
+
+        if digit_sum == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # If no such numbers meet the criteria, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage (This part isn't necessary for the solution, just for testing purposes):
+# import random
+# random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 35.21 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+    whose digits sum up to 30."""
+    # Hypothetical extreme bounds for initial min and max, based on number range
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        # Calculate digit sum inline for potentially faster execution
+        n = number
+        digit_sum = 0
+        while n > 0:
+            n, remainder = divmod(n, 10)
+            digit_sum += remainder
+
+        if digit_sum == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If no such numbers meet the criteria, return 0
+    if min_number == float('inf') or max_number == float('-inf'):
+        return 0
+
+    return max_number - min_number
+
+# Example usage (This part isn't necessary for the solution, just for testing purposes):
+# import random
+# random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 17.36 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+    whose digits sum up to 30."""
+
+    # Using None to track if we find a valid number with a digit sum of 30
+    min_number = None
+    max_number = None
+
+    for number in numbers:
+        digit_sum = 0
+        n = number
+
+        # Efficient calculation of digit sum using divmod in a loop
+        while n > 0:
+            n, remainder = divmod(n, 10)
+            digit_sum += remainder
+
+        if digit_sum == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # If no such numbers meet the criteria, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage (This part isn't necessary for the solution, just for testing purposes):
+# import random
+# random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 0.78 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+    whose digits sum up to 30."""
+
+    min_number = None
+    max_number = None
+
+    for number in numbers:
+        digit_sum = 0
+        n = number
+
+        while n > 0:
+            n, remainder = divmod(n, 10)
+            digit_sum += remainder
+
+            # Early termination if the digit sum exceeds 30
+            if digit_sum > 30:
+                break
+
+        if digit_sum == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage (This part isn't necessary for the solution, just for testing purposes):
+# import random
+# random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_numbers))
+
+Time limit reached: 120 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+    whose digits sum up to 30."""
+
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    for number in numbers:
+        digit_sum = 0
+        n = number
+
+        while n > 0:
+            n, remainder = divmod(n, 10)
+            digit_sum += remainder
+
+            # Early termination if the digit sum exceeds 30
+            if digit_sum > 30:
+                break
+
+        if digit_sum == 30:
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If no numbers met the sum of 30 condition, return 0
+    if min_number == float('inf') or max_number == float('-inf'):
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+# import random
+# random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_numbers))
+Solution saved to 2_inf_120_1.py
+
+Average time per generation: 20.26 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 40.65 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    # Filter numbers whose digits sum to 30
+    valid_numbers = [num for num in numbers if sum_of_digits(num) == 30]
+
+    if not valid_numbers:
+        return 0  # or raise an Exception if needed
+
+    # Find the minimum and maximum in the filtered list
+    min_number = min(valid_numbers)
+    max_number = max(valid_numbers)
+
+    # Return the difference
+    return max_number - min_number
+
+# Example usage:
+# Assuming `numbers` is the list of 1 million random integers
+# result = get_difference(numbers)
+# print(result)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 19.75 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    min_number = float('inf')
+    max_number = float('-inf')
+    found = False
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            found = True
+            if num < min_number:
+                min_number = num
+            if num > max_number:
+                max_number = num
+
+    if not found:
+        return 0  # or raise an Exception if needed
+
+    return max_number - min_number
+
+# Example usage:
+# Assuming `numbers` is the list of 1 million random integers
+# result = get_difference(numbers)
+# print(result)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 5.39 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        # Use map and a generator instead of list comprehension for efficiency
+        return sum(map(int, str(n)))
+
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    # Iterate over the list of numbers once
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            if num < min_number:
+                min_number = num
+            if num > max_number:
+                max_number = num
+
+    # Check if no valid number was found
+    if min_number == float('inf'):  # Equivalent to not having found any
+        return 0  # or raise an Exception if needed
+
+    return max_number - min_number
+
+# Example usage:
+# Assuming `numbers` is the list of 1 million random integers
+# result = get_difference(numbers)
+# print(result)
+
+Time limit reached: 60 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    def sum_of_digits(n):
+        return sum(map(int, str(n)))
+
+    min_number = None
+    max_number = None
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            if min_number is None or num < min_number:
+                min_number = num
+            if max_number is None or num > max_number:
+                max_number = num
+
+    if min_number is None:
+        return 0  # or handle this as an exception
+
+    return max_number - min_number
+
+# Example usage:
+# Assuming `numbers` is the list of 1 million random integers
+# result = get_difference(numbers)
+# print(result)
+Solution saved to 3_inf_60_1.py
+
+Average time per generation: 20.54 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 105.65 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Calculate the sum of the digits of a number."""
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    min_number = None
+    max_number = None
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # If we didn't find any number with digit sum 30, we handle the edge case
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+# numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 91.67 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Calculate the sum of the digits of a number."""
+    return sum(int(d) for d in str(n))
+
+def get_difference(numbers):
+    # Constants for large/small assumptions based on constraints
+    min_number = float('inf')  # Assume a very large number initially
+    max_number = float('-inf') # Assume a very small number initially
+
+    found = False  # Flag to check if we've found at least one number
+
+    for number in numbers:
+        ds = digit_sum(number)  # Calculate digit sum once
+        if ds == 30:
+            found = True  # Mark that we've found a valid number
+            # Update min and max numbers accordingly
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # If we haven't found any valid numbers, return 0
+    if not found:
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+# numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 74.48 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Calculate the sum of the digits of a number using integer arithmetic."""
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def get_difference(numbers):
+    min_number = float('inf')
+    max_number = float('-inf')
+    found = False
+
+    for number in numbers:
+        ds = digit_sum(number)
+        if ds == 30:
+            found = True
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+            # Early exit condition: if we can no longer find a better min/max
+            if min_number == 999999 and max_number == 999999999:  # Assuming these limits based on digit sum
+                break
+
+    if not found:
+        return 0
+    return max_number - min_number
+
+# Example usage:
+# numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 59.01 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Calculate the sum of the digits of a number using integer arithmetic."""
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def get_difference(numbers):
+    min_number = float('inf')
+    max_number = float('-inf')
+    found = False
+
+    # Iterate over the numbers to find the valid min and max
+    for number in numbers:
+        ds = digit_sum(number)
+
+        # Check if the digit sum is 30
+        if ds == 30:
+            found = True
+
+            if number < min_number:
+                min_number = number
+
+            if number > max_number:
+                max_number = number
+
+            # Early exit condition, assuming realistic bounds for extreme cases
+            if min_number == 100000 and max_number >= 999999999:
+                break
+
+    # Return the difference if we found number matching the digit sum of 30
+    if not found:
+        return 0
+    return max_number - min_number
+
+# Example usage:
+# numbers = [random.randint(1, 1000000000) for _ in range(1000000)]
+# print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 41.27 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Calculate the sum of the digits of a number using integer arithmetic."""
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def get_difference(numbers):
+    min_number = None
+    max_number = None
+
+    # Iterate over the numbers to find the valid min and max
+    for number in numbers:
+        ds = digit_sum(number)
+
+        # Check if the digit sum is 30
+        if ds == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+
+            if max_number is None or number > max_number:
+                max_number = number
+
+            # If we found numbers that have reached realistic extreme bounds, break early
+            # These are realistic bound assessments in typical ranges
+            if min_number == 100000 and max_number >= 999999999:
+                break
+
+    # If no numbers with the digit sum of 30 were found, handle this edge case
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+import random
+
+# Larger range should also be tested for coverage
+numbers = [random.randint(1, 1000000000) for _ in range(1000000)]
+print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 18.07 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Calculate the sum of the digits of a number using integer arithmetic."""
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def precompute_digit_sums(limit):
+    """Precompute digit sums for numbers up to a given limit."""
+    sums = [0] * (limit + 1)
+    for i in range(limit + 1):
+        sums[i] = digit_sum(i)
+    return sums
+
+def get_difference(numbers):
+    min_number = None
+    max_number = None
+
+    # Precompute the digit sums for numbers up to 100,000
+    precomputed_sums = precompute_digit_sums(99999)
+
+    for number in numbers:
+        # For numbers up to 99,999, use precomputed sums; otherwise, calculate directly
+        if number <= 99999:
+            ds = precomputed_sums[number]
+        else:
+            ds = digit_sum(number)
+
+        if ds == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+            # Early exit if extreme expected outer bounds have been met
+            if min_number == 100000 and max_number >= 999999999:
+                break
+
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+import random
+
+# Include larger but realistic numbers and test with 1 million values
+numbers = [random.randint(1, 1000000000) for _ in range(1000000)]
+print(get_difference(numbers))
+
+Time limit reached: 120 seconds. Stopping execution.
+Final Solution:
+def digit_sum(n):
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def precompute_digit_sums(limit):
+    sums = [0] * (limit + 1)
+    for i in range(limit + 1):
+        sums[i] = digit_sum(i)
+    return sums
+
+def get_difference(numbers):
+    min_number = None
+    max_number = None
+
+    # Precompute the digit sums for numbers up to 999,999
+    precomputed_sums = precompute_digit_sums(999999)
+
+    for number in numbers:
+        # Choose computation method based on number size
+        if number <= 999999:
+            ds = precomputed_sums[number]
+        else:
+            if number < 270:  # A number below 270 can't sum its digits to 30
+                continue
+            ds = digit_sum(number)
+
+        if ds == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+            # Early exit if the minimal realistic bounds are found
+            if min_number == 100000 and max_number >= 999999999:
+                break
+
+    if min_number is None or max_number is None:
+        return 0
+
+    return max_number - min_number
+
+# Example usage:
+import random
+
+numbers = [random.randint(1, 1000000000) for _ in range(1000000)]
+print(get_difference(numbers))
+Solution saved to 3_inf_120_1.py
+
+Average time per generation: 17.30 seconds
+
+
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Helper function to calculate the sum of digits of a number."""
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    min_val = float('inf')
+    max_val = float('-inf')
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            if number < min_val:
+                min_val = number
+            if number > max_val:
+                max_val = number
+
+    # Check if we found at least one number with digit sum = 30
+    if min_val == float('inf') or max_val == float('-inf'):
+        # If not, return a special value or handle it as needed
+        return None
+
+    return max_val - min_val
+
+# Example usage:
+import random
+
+# Generating a list of 1 million integers ranging from 1 to 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Using the function
+difference = get_difference(numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Optimized function to calculate the sum of digits of a number."""
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def get_difference(numbers):
+    min_val = float('inf')
+    max_val = float('-inf')
+    found = False
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            found = True
+            if number < min_val:
+                min_val = number
+            if number > max_val:
+                max_val = number
+
+    if not found:
+        # No numbers with digit sum 30 found
+        return None
+
+    return max_val - min_val
+
+# Example usage:
+import random
+
+# Generating a list of 1 million integers ranging from 1 to 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Using the function
+difference = get_difference(numbers)
+print(difference)
+
+Final Solution:
+def digit_sum(n):
+    """Function to calculate the sum of digits of a number."""
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def get_difference(numbers):
+    min_val = float('inf')
+    max_val = float('-inf')
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            if number < min_val:
+                min_val = number
+            if number > max_val:
+                max_val = number
+            # If we find both min and max as identical (highly unlikely but theoretically possible),
+            # we can choose to break if no further useful computation is possible.
+            if min_val < float('inf') and max_val > float('-inf'):
+                if min_val == max_val:
+                    break
+
+    # If min and max have not been updated, return None
+    if min_val == float('inf') or max_val == float('-inf'):
+        return None
+
+    return max_val - min_val
+
+# Example usage:
+import random
+
+# Generating a list of 1 million integers ranging from 1 to 100,000
+numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Using the function
+difference = get_difference(numbers)
+print(difference)
+Solution saved to 1_3_inf_2.py
+
+Average time per generation: 17.68 seconds
+
+
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(number):
+    """Calculate the sum of digits of a given number."""
+    return sum(int(digit) for digit in str(number))
+
+def get_difference(numbers):
+    """Find the difference between the smallest and largest numbers in the list whose digits sum up to 30."""
+    filtered_numbers = [num for num in numbers if digit_sum(num) == 30]
+
+    if not filtered_numbers:
+        return None  # If no numbers are found with a digit sum of 30, return None.
+
+    smallest = min(filtered_numbers)
+    largest = max(filtered_numbers)
+
+    return largest - smallest
+
+# Example usage:
+# Generate a list of 1 million random integers between 1 and 100,000.
+import random
+
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Find the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(number):
+    """Calculate the sum of digits of a number using arithmetic operations."""
+    total = 0
+    while number > 0:
+        total += number % 10
+        number //= 10
+    return total
+
+def get_difference(numbers):
+    """Optimized function to find the difference between the smallest and largest numbers whose digits sum up to 30."""
+    min_num = float('inf')
+    max_num = float('-inf')
+    found = False
+
+    for num in numbers:
+        if digit_sum(num) == 30:
+            found = True
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    if not found:
+        return None  # If no numbers match the condition, return None.
+
+    return max_num - min_num
+
+# Example usage:
+import random
+
+# Generate 1 million random integers between 1 and 100,000.
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Find the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(number):
+    """Calculate the sum of digits of a number using arithmetic operations."""
+    total = 0
+    while number > 0:
+        total += number % 10
+        number //= 10
+    return total
+
+def get_difference(numbers):
+    """Optimize the function to find the difference between the smallest and largest numbers whose digits sum to 30."""
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for num in numbers:
+        # Immediately filter by checking the digit sum
+        if digit_sum(num) == 30:
+            # Instead of checking 'found', we check if min_num or max_num should be updated
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    # Check if min_num is updated (indicating a valid number was found)
+    return max_num - min_num if min_num != float('inf') else None
+
+# Example usage:
+import random
+
+# Generate 1 million random integers between 1 and 100,000.
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Find the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Find the difference between the smallest and largest numbers whose digits sum to 30."""
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for num in numbers:
+        total = 0
+        temp_num = num
+        while temp_num > 0:
+            total += temp_num % 10
+            temp_num //= 10
+
+        if total == 30:
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    # Return the difference only if valid numbers were found
+    return max_num - min_num if min_num != float('inf') else None
+
+# Example usage
+import random
+
+# Generate 1 million random integers between 1 and 100,000.
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Find the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    """Find the difference between the smallest and largest numbers whose digits sum to 30."""
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for num in numbers:
+        total = 0
+        temp_num = num
+
+        while temp_num > 0:
+            total += temp_num % 10
+            temp_num //= 10
+
+        if total == 30:
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    # Return the difference only if a valid pair was found
+    return max_num - min_num if min_num != float('inf') else None
+
+# Example usage
+import random
+
+# Generate 1 million random integers between 1 and 100,000.
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Find the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_digit_sum(num):
+    """Compute the sum of digits in a number."""
+    total = 0
+    while num > 0:
+        total += num % 10
+        num //= 10
+    return total
+
+def get_difference(numbers):
+    """Find the difference between the smallest and largest numbers whose digits sum to 30."""
+    min_num = None
+    max_num = None
+
+    for num in numbers:
+        if get_digit_sum(num) == 30:
+            if min_num is None or num < min_num:
+                min_num = num
+            if max_num is None or num > max_num:
+                max_num = num
+
+    # Return the difference only if a valid pair was found
+    return max_num - min_num if min_num is not None else None
+
+# Example usage
+import random
+
+# Generate 1 million random integers between 1 and 100,000.
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Find the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_digit_sum(num):
+    """Compute the sum of digits in a number."""
+    total = 0
+    while num > 0:
+        total += num % 10
+        num //= 10
+    return total
+
+def get_difference(numbers):
+    """Find the difference between the smallest and largest numbers whose digits sum to 30."""
+    # Filter numbers using a generator expression
+    filtered_numbers = (num for num in numbers if get_digit_sum(num) == 30)
+
+    try:
+        # Use min and max functions directly on the filtered generator
+        min_num = float('inf')
+        max_num = float('-inf')
+
+        for num in filtered_numbers:
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+        # Check if we found at least one valid number
+        if min_num == float('inf') or max_num == float('-inf'):
+            return None
+
+        return max_num - min_num
+    except ValueError:
+        # If no numbers were valid, return None
+        return None
+
+# Example usage
+import random
+
+# Generate 1 million random integers between 1 and 100,000.
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Find the difference
+difference = get_difference(random_numbers)
+print(difference)
+
+Final Solution:
+def get_digit_sum(num):
+    """Compute the sum of digits in a number."""
+    total = 0
+    while num > 0:
+        total += num % 10
+        num //= 10
+    return total
+
+def get_difference(numbers):
+    """Find the difference between the smallest and largest numbers whose digits sum to 30."""
+    min_num = float('inf')
+    max_num = float('-inf')
+    found = False
+
+    for num in numbers:
+        if get_digit_sum(num) == 30:
+            found = True
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    if not found:
+        return None
+
+    return max_num - min_num
+
+# Example usage
+import random
+
+# Generate 1 million random integers between 1 and 100,000.
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Find the difference
+difference = get_difference(random_numbers)
+print(difference)
+Solution saved to 1_8_inf_2.py
+
+Average time per generation: 13.49 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def sum_of_digits(n):
+    """Helper function to calculate the sum of digits of a number."""
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+       in the list whose digits sum up to 30."""
+
+    smallest = float('inf')
+    largest = float('-inf')
+
+    for number in numbers:
+        if sum_of_digits(number) == 30:
+            if number < smallest:
+                smallest = number
+            if number > largest:
+                largest = number
+
+    # If we didn't find any number with digits summing to 30
+    if smallest == float('inf') or largest == float('-inf'):
+        return 0
+
+    return largest - smallest
+
+# Example of how you might use this function
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Call the function
+difference = get_difference(random_numbers)
+print(difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def sum_of_digits(n):
+    """Helper function to calculate the sum of digits of a number using a mathematical approach."""
+    digit_sum = 0
+    while n > 0:
+        digit_sum += n % 10
+        n //= 10
+    return digit_sum
+
+def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+       in the list whose digits sum up to 30."""
+
+    smallest = None
+    largest = None
+
+    for number in numbers:
+        if sum_of_digits(number) == 30:
+            if smallest is None or number < smallest:
+                smallest = number
+            if largest is None or number > largest:
+                largest = number
+
+    # If we didn't find any number with digits summing to 30
+    if smallest is None or largest is None:
+        return 0
+
+    return largest - smallest
+
+# Example of how you might use this function
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Call the function
+difference = get_difference(random_numbers)
+print(difference)
+
+Final Solution:
+def sum_of_digits(n):
+    """Helper function to calculate the sum of digits of a number using a mathematical approach."""
+    digit_sum = 0
+    while n > 0:
+        digit_sum += n % 10
+        if digit_sum > 30:
+            return digit_sum
+        n //= 10
+    return digit_sum
+
+def get_difference(numbers):
+    """Function to find the difference between the smallest and largest numbers
+       in the list whose digits sum up to 30."""
+
+    smallest = float('inf')
+    largest = float('-inf')
+
+    for number in numbers:
+        if sum_of_digits(number) == 30:
+            if number < smallest:
+                smallest = number
+            if number > largest:
+                largest = number
+
+    return largest - smallest if smallest != float('inf') and largest != float('-inf') else 0
+
+# Example of how you might use this function
+import random
+
+# Generate a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Call the function
+difference = get_difference(random_numbers)
+print(difference)
+Solution saved to 2_3_inf_2.py
+
+Average time per generation: 22.16 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Helper function to calculate the sum of digits of a number
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    # Initialize variables to hold the smallest and largest numbers
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    # Loop through each number in the list
+    for number in numbers:
+        # Check if the sum of digits is 30
+        if digit_sum(number) == 30:
+            # Update the smallest and largest numbers
+            if number < min_number:
+                min_number = number
+            if number > max_number:
+                max_number = number
+
+    # In case no number with digit sum 30 is found, return a meaningful indicator, e.g., zero
+    if min_number == float('inf') or max_number == float('-inf'):
+        return 0
+
+    # Return the difference between the largest and smallest found numbers
+    return max_number - min_number
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Optimized helper function to calculate the sum of digits of a number
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    # Initialize variables to track the smallest and largest valid numbers
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    # Loop through each number in the list
+    for number in numbers:
+        # Check if the sum of digits is 30
+        if digit_sum(number) == 30:
+            # Update the smallest number
+            if number < min_number:
+                min_number = number
+            # Update the largest number
+            if number > max_number:
+                max_number = number
+
+    # If no valid numbers are found, return 0
+    if min_number == float('inf') or max_number == float('-inf'):
+        return 0
+
+    # Return the difference between the largest and smallest found numbers
+    return max_number - min_number
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Optimized helper function to calculate the sum of digits of a number
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    # Initialize variables to track the smallest and largest valid numbers as None
+    min_number = None
+    max_number = None
+
+    # Loop through each number in the list
+    for number in numbers:
+        # Check if the sum of digits is 30
+        if digit_sum(number) == 30:
+            # Update the smallest number
+            if min_number is None or number < min_number:
+                min_number = number
+            # Update the largest number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # If no valid numbers are found, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    # Return the difference between the largest and smallest found numbers
+    return max_number - min_number
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Optimized helper function to calculate the sum of digits of a number
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    # Initialize variables to track the smallest and largest valid numbers as infinity
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    # Flag to check if we have found any number with digit sum of 30
+    found = False
+
+    # Loop through each number in the list
+    for number in numbers:
+        # Check if the sum of digits is 30
+        if digit_sum(number) == 30:
+            found = True
+            # Update the smallest number
+            if number < min_number:
+                min_number = number
+            # Update the largest number
+            if number > max_number:
+                max_number = number
+
+    # If no valid numbers are found, return 0
+    if not found:
+        return 0
+
+    # Return the difference between the largest and smallest found numbers
+    return max_number - min_number
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Efficient helper function to calculate the sum of digits of a number
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    # Initialize variables to track the smallest and largest valid numbers
+    min_number = None
+    max_number = None
+
+    # Loop through each number in the list
+    for number in numbers:
+        # Check if the sum of digits is 30
+        if digit_sum(number) == 30:
+            # Update the smallest and largest numbers in one go
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # If no valid numbers are found, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    # Return the difference between the largest and smallest found numbers
+    return max_number - min_number
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Helper function to calculate the sum of digits of a number
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    # Initialize variables to track the smallest and largest valid numbers
+    min_number = None
+    max_number = None
+
+    # Loop through each number in the list
+    for number in numbers:
+        if digit_sum(number) == 30:
+            # Since None is falsey in a boolean context, we can simplify the checks
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+            # Early exit if we've found both a min and a max in the first pass
+            if min_number is not None and max_number is not None:
+                break
+
+    # If no valid numbers are found, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    # Return the difference between the largest and smallest found numbers
+    return max_number - min_number
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Helper function to calculate the sum of digits of a number
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    # Initialize variables to track the smallest and largest valid numbers
+    min_number = None
+    max_number = None
+
+    # Loop through each number in the list
+    for number in numbers:
+        if digit_sum(number) == 30:
+            if min_number is None or number < min_number:
+                min_number = number
+            if max_number is None or number > max_number:
+                max_number = number
+
+    # If no valid numbers are found, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    # Return the difference between the largest and smallest found numbers
+    return max_number - min_number
+
+Final Solution:
+def get_difference(numbers):
+    # Initialize variables to track the smallest and largest valid numbers
+    min_number = None
+    max_number = None
+
+    # Loop through each number in the list
+    for number in numbers:
+        n = number
+        total = 0
+
+        # Calculate the digit sum directly in the loop
+        while n > 0:
+            total += n % 10
+            n //= 10
+
+        # Check if it matches the desired digit sum
+        if total == 30:
+            if min_number is None:
+                min_number = number
+                max_number = number
+            else:
+                if number < min_number:
+                    min_number = number
+                if number > max_number:
+                    max_number = number
+
+    # If no valid numbers are found, return 0
+    if min_number is None or max_number is None:
+        return 0
+
+    # Return the difference between the largest and smallest found numbers
+    return max_number - min_number
+Solution saved to 2_8_inf_2.py
+
+Average time per generation: 14.65 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Helper function to compute the sum of digits of a number."""
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    candidate_numbers = []
+
+    # Iterate over each number in the list
+    for number in numbers:
+        # Check if the sum of digits is 30
+        if digit_sum(number) == 30:
+            candidate_numbers.append(number)
+
+    # If there are no numbers with digit sum of 30, return None or 0.
+    if not candidate_numbers:
+        return 0
+
+    # Determine the smallest and largest numbers from the candidates
+    smallest = min(candidate_numbers)
+    largest = max(candidate_numbers)
+
+    # Return the difference
+    return largest - smallest
+
+# Example usage (with smaller numbers for demonstration purposes):
+# import random
+# numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(numbers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        def digit_sum(n):
+    """Helper function to compute the sum of digits of a number."""
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    # Initialize smallest and largest as None
+    smallest = None
+    largest = None
+
+    # Iterate over each number in the list
+    for number in numbers:
+        # Check if the sum of digits is 30
+        if digit_sum(number) == 30:
+            # Update smallest and largest as needed
+            if smallest is None or number < smallest:
+                smallest = number
+            if largest is None or number > largest:
+                largest = number
+
+    # If no valid numbers were found, return 0
+    if smallest is None or largest is None:
+        return 0
+
+    # Return the difference
+    return largest - smallest
+
+# Example usage (with smaller numbers for demonstration purposes):
+# import random
+# numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(numbers))
+
+Final Solution:
+def digit_sum(n):
+    """Efficiently compute the sum of digits of a number using integer arithmetic."""
+    total = 0
+    while n > 0:
+        total += n % 10
+        n //= 10
+    return total
+
+def get_difference(numbers):
+    # Initialize smallest and largest to None
+    smallest = None
+    largest = None
+
+    # Iterate over each number in the list
+    for number in numbers:
+        # Check if the sum of digits is 30
+        if digit_sum(number) == 30:
+            # Update smallest and largest as needed
+            if smallest is None or number < smallest:
+                smallest = number
+            if largest is None or number > largest:
+                largest = number
+
+    # If no valid numbers were found, return 0
+    if smallest is None or largest is None:
+        return 0
+
+    # Return the difference
+    return largest - smallest
+
+# Example usage (with smaller numbers for demonstration purposes):
+# import random
+# numbers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(numbers))
+Solution saved to 3_3_inf_2.py
+
+Average time per generation: 35.12 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        import random
+
+def get_difference(num_list):
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    # Filter numbers whose digit sum equals 30
+    filtered_numbers = [num for num in num_list if digit_sum(num) == 30]
+
+    if not filtered_numbers:  # Edge case: no numbers with digit sum of 30
+        return None
+
+    # Find minimum and maximum in the filtered list
+    min_num = min(filtered_numbers)
+    max_num = max(filtered_numbers)
+
+    # Return the difference
+    return max_num - min_num
+
+# Example: Simulating a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(10**6)]
+
+# Call the function with the random number list
+difference = get_difference(random_numbers)
+
+print(f"The difference is: {difference}")
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        import random
+
+def get_difference_optimized(num_list):
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    min_num = float('inf')
+    max_num = float('-inf')
+    found = False
+
+    for num in num_list:
+        if digit_sum(num) == 30:
+            found = True
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    if not found:  # Edge case: no numbers with digit sum of 30
+        return None
+
+    return max_num - min_num
+
+# Example: Simulating a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(10**6)]
+
+# Call the optimized function with the random number list
+difference = get_difference_optimized(random_numbers)
+
+print(f"The difference is: {difference}")
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        import random
+
+def get_difference_optimized(num_list):
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    min_num = float('inf')
+    max_num = float('-inf')
+    found = False
+
+    for num in num_list:
+        if digit_sum(num) == 30:
+            found = True
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    if not found:  # Edge case: no numbers with digit sum of 30
+        return None
+
+    return max_num - min_num
+
+# Example: Simulating a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(10**6)]
+
+# Call the optimized function with the random number list
+difference = get_difference_optimized(random_numbers)
+
+print(f"The difference is: {difference}")
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        import random
+
+def get_difference_optimized(num_list):
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total, n = total + n % 10, n // 10
+        return total
+
+    min_num = float('inf')
+    max_num = float('-inf')
+    found = False
+
+    for num in num_list:
+        # Only calculate digit_sum once per iteration
+        if digit_sum(num) == 30:
+            found = True
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    if not found:  # Edge case: no numbers with digit sum of 30
+        return None
+
+    return max_num - min_num
+
+# Example: Simulating a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(10**6)]
+
+# Call the optimized function with the random number list
+difference = get_difference_optimized(random_numbers)
+
+print(f"The difference is: {difference}")
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        import random
+
+def get_difference_optimized_direct(num_list):
+    min_num = float('inf')
+    max_num = float('-inf')
+    found = False
+
+    for num in num_list:
+        n = num
+        total = 0
+
+        # Directly calculate digit sum without a function
+        while n > 0:
+            total, n = total + n % 10, n // 10
+
+        if total == 30:
+            found = True
+            min_num = min(min_num, num)
+            max_num = max(max_num, num)
+
+    if not found:  # Edge case: no numbers with digit sum of 30
+        return None
+
+    return max_num - min_num
+
+# Example: Simulating a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(10**6)]
+
+# Call the optimized function with the random number list
+difference = get_difference_optimized_direct(random_numbers)
+
+print(f"The difference is: {difference}")
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        import random
+
+def get_difference_optimized_direct(num_list):
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for num in num_list:
+        n = num
+        total = 0
+
+        # Directly compute the digit sum
+        while n > 0:
+            total += n % 10
+            n //= 10
+
+        if total == 30:
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    # Check if no number was found with a digit sum of 30
+    if min_num == float('inf') and max_num == float('-inf'):
+        return None
+
+    return max_num - min_num
+
+# Example: Simulating a list of 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(10**6)]
+
+# Call the optimized function with the random number list
+difference = get_difference_optimized_direct(random_numbers)
+
+print(f"The difference is: {difference}")
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+
+
+        CURRENT SOLUTION:
+        import random
+
+def get_difference_optimized(num_list):
+    min_num, max_num = None, None
+
+    for num in num_list:
+        n = num
+        total = 0
+
+        # Directly compute the digit sum
+        while n > 0:
+            total += n % 10
+            n //= 10
+
+        if total == 30:
+            if min_num is None or num < min_num:
+                min_num = num
+            if max_num is None or num > max_num:
+                max_num = num
+
+    # If no suitable number was found, return None
+    if min_num is None or max_num is None:
+        return None
+
+    return max_num - min_num
+
+# Example usage with 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(10**6)]
+
+# Call the optimized function with the random number list
+difference = get_difference_optimized(random_numbers)
+
+print(f"The difference is: {difference}")
+
+Final Solution:
+import random
+
+def get_difference_optimized(num_list):
+    # Initialize with large and small infinity to avoid None checks
+    min_num, max_num = float('inf'), float('-inf')
+    found = False  # Flag to check if we have found any number meeting the criteria
+
+    for num in num_list:
+        n = num
+        total = 0
+
+        # Directly compute the digit sum
+        while n > 0:
+            total += n % 10
+            n //= 10
+
+        if total == 30:
+            found = True
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    # If no suitable number was found, return None
+    if not found:
+        return None
+
+    return max_num - min_num
+
+# Example usage with 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(10**6)]
+
+# Call the optimized function with the random number list
+difference = get_difference_optimized(random_numbers)
+
+print(f"The difference is: {difference}")
+Solution saved to 3_8_inf_2.py
+
+Average time per generation: 12.67 seconds
+
+
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 48.21 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    min_value = float('inf')
+    max_value = float('-inf')
+    found = False
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            found = True
+            if number < min_value:
+                min_value = number
+            if number > max_value:
+                max_value = number
+
+    if found:
+        return max_value - min_value
+    else:
+        return 0  # Assuming you want to return 0 if no such numbers are found
+
+# Example usage:
+import random
+
+# Generate 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Call the function
+difference = get_difference(random_numbers)
+print("Difference:", difference)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 36.21 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    min_value = float('inf')
+    max_value = float('-inf')
+    found = False
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            found = True
+            if number < min_value:
+                min_value = number
+            if number > max_value:
+                max_value = number
+
+    if found:
+        return max_value - min_value
+    else:
+        return 0  # Alternatively, raise an exception or use a sentinel value
+
+# Example usage:
+import random
+
+# Generate 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Call the function and measure the time taken
+import time
+
+start_time = time.time()
+difference = get_difference(random_numbers)
+end_time = time.time()
+
+print("Difference:", difference)
+print("Execution Time:", end_time - start_time)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 21.79 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    min_value = float('inf')
+    max_value = float('-inf')
+    found = False
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            found = True
+            if number < min_value:
+                min_value = number
+            if number > max_value:
+                max_value = number
+            # Early termination if the entire range would not offer any change.
+            if min_value != float('inf') and max_value != float('-inf'):
+                # Assume the range of numbers is not extending further
+                # in a way that could include extreme values not yet checked.
+
+                # Check the difference is maximum
+                if max_value - min_value >= 99999:  # Since number range is 1 - 100000
+                    break
+
+    return max_value - min_value if found else 0
+
+# Example usage:
+import random
+
+# Generate 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Call the function and measure the time taken
+import time
+
+start_time = time.time()
+difference = get_difference(random_numbers)
+end_time = time.time()
+
+print("Difference:", difference)
+print("Execution Time:", end_time - start_time)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 9.93 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        total = 0
+        while n > 0:
+            n, remainder = divmod(n, 10)
+            total += remainder
+        return total
+
+    min_value = float('inf')
+    max_value = float('-inf')
+    found = False
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            found = True
+            min_value = min(min_value, number)
+            max_value = max(max_value, number)
+            # Early termination: When min and max absolute difference can't be altered in this range.
+            if max_value - min_value >= 99999:  # Since the number range is 1 - 100000
+                break
+
+    return max_value - min_value if found else 0
+
+# Example usage:
+import random
+
+# Generate 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Call the function and measure the time taken
+import time
+
+start_time = time.time()
+difference = get_difference(random_numbers)
+end_time = time.time()
+
+print("Difference:", difference)
+print("Execution Time:", end_time - start_time)
+
+Time limit reached: 60 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    min_value = float('inf')
+    max_value = float('-inf')
+    found = False
+
+    for number in numbers:
+        if digit_sum(number) == 30:
+            found = True
+            min_value = min(min_value, number)
+            max_value = max(max_value, number)
+            if max_value - min_value >= 99999:  # Optimization: Early exit
+                break
+
+    return max_value - min_value if found else 0
+
+# Example usage:
+import random
+
+# Generate 1 million random integers between 1 and 100,000
+random_numbers = [random.randint(1, 100000) for _ in range(1000000)]
+
+# Call the function and measure the time taken
+import time
+
+start_time = time.time()
+difference = get_difference(random_numbers)
+end_time = time.time()
+
+print("Difference:", difference)
+print("Execution Time:", end_time - start_time)
+Solution saved to 1_inf_60_2.py
+
+Average time per generation: 13.55 seconds
+
+
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 105.24 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    # Filter the numbers that have digits summing up to 30
+    valid_numbers = [num for num in numbers if sum_of_digits(num) == 30]
+
+    if not valid_numbers:
+        return 0  # or alternatively, handle the situation if no such numbers exist
+
+    # Find the smallest and largest numbers in the filtered list
+    smallest = min(valid_numbers)
+    largest = max(valid_numbers)
+
+    # Return the difference between the largest and smallest numbers
+    return largest - smallest
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 94.06 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        return sum(int(digit) for digit in str(n))
+
+    smallest = float('inf')
+    largest = float('-inf')
+    found_valid = False
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            found_valid = True
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    if not found_valid:
+        return 0
+
+    return largest - smallest
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 83.74 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    smallest = None
+    largest = None
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is None:  # No valid numbers were found
+        return 0
+
+    return largest - smallest
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 69.11 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    # Initialize smallest and largest with infinity for easier comparison
+    smallest, largest = float('inf'), -float('inf')
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    # Check if smallest was updated
+    if smallest == float('inf'):
+        return 0
+
+    return largest - smallest
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 55.43 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def sum_of_digits(n):
+        total = 0
+        while n > 0:
+            total += n % 10
+            n //= 10
+        return total
+
+    # Initialize smallest and largest with None
+    smallest = largest = None
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    # Check if smallest was updated, i.e., if any number was found
+    if smallest is None:
+        return 0
+
+    return largest - smallest
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 38.35 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_num = float('inf')  # Start with infinity as initial values
+    max_num = float('-inf')
+
+    for num in numbers:
+        total = 0
+        temp = num  # Work on a copy of the number
+        while temp > 0:
+            total += temp % 10
+            temp //= 10
+
+        if total == 30:
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    if min_num == float('inf'):  # Check if min_num was updated
+        return 0
+
+    return max_num - min_num
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 28.80 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+    found = False
+
+    for num in numbers:
+        total = sum(int(digit) for digit in str(num))
+
+        if total == 30:
+            found = True
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    return max_num - min_num if found else 0
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+
+
+        Here is the current Python solution :
+        Optimize it for faster execution.
+        You have 13.44 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_num = float('inf')
+    max_num = float('-inf')
+
+    for num in numbers:
+        total = 0
+        n = num
+        # Calculate sum of digits without converting to string
+        while n > 0:
+            total += n % 10
+            n //= 10
+
+        if total == 30:
+            if num < min_num:
+                min_num = num
+            if num > max_num:
+                max_num = num
+
+    if min_num == float('inf'):  # or alternatively check max_num == float('-inf')
+        return 0
+
+    return max_num - min_num
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+
+Time limit reached: 120 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    min_num = None
+    max_num = None
+
+    for num in numbers:
+        total, n = 0, num
+        while n > 0:
+            total += n % 10
+            n //= 10
+
+        if total == 30:
+            if min_num is None or num < min_num:
+                min_num = num
+            if max_num is None or num > max_num:
+                max_num = num
+
+    # If no number met the condition, return 0
+    if min_num is None:
+        return 0
+
+    return max_num - min_num
+
+# Example usage:
+# Assuming `random_numbers` is your list of 1,000,000 integers
+# result = get_difference(random_numbers)
+Solution saved to 1_inf_120_2.py
+
+Average time per generation: 15.15 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 49.28 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    # Filter numbers with a digit sum of 30
+    filtered_numbers = [num for num in numbers if digit_sum(num) == 30]
+
+    # If no such numbers exist, return 0 (or it could be handled differently based on requirements)
+    if not filtered_numbers:
+        return 0
+
+    # Calculate the smallest and the largest numbers from the filtered list
+    smallest = min(filtered_numbers)
+    largest = max(filtered_numbers)
+
+    # Return the difference between largest and smallest numbers
+    return largest - smallest
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 37.74 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    smallest = float('inf')
+    largest = float('-inf')
+    found = False
+
+    for num in numbers:
+        if digit_sum(num) == 30:
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+            found = True
+
+    # Return the difference between largest and smallest numbers, or 0 if none found
+    return (largest - smallest) if found else 0
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 27.17 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        return sum(int(digit) for digit in str(n))
+
+    smallest = None
+    largest = None
+
+    for num in numbers:
+        if digit_sum(num) == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    # Ensure both smallest and largest were found
+    return (largest - smallest) if smallest is not None and largest is not None else 0
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 12.85 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        # Precompute the digit sums for all numbers from 1 to 99999
+        digit_sum_cache = [sum(int(d) for d in str(i)) for i in range(100000)]
+        return digit_sum_cache[n]
+
+    smallest = None
+    largest = None
+
+    # Use digit_sum_cache to avoid re-calculating the digit sum repeatedly
+    for num in numbers:
+        if digit_sum(num) == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    # Ensure both smallest and largest were found
+    return (largest - smallest) if smallest is not None and largest is not None else 0
+
+Time limit reached: 60 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    # Precompute the digit sums for all numbers from 1 to 99999
+    digit_sum_cache = [sum(int(d) for d in str(i)) for i in range(100000)]
+
+    smallest = float('inf')
+    largest = -float('inf')
+    found = False
+
+    for num in numbers:
+        if digit_sum_cache[num] == 30:
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+            found = True
+
+    # If found is False, it means no number had digit sum of 30
+    return (largest - smallest) if found else 0
+
+Solution saved to 2_inf_60_2.py
+
+Average time per generation: 11.86 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 102.61 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def sum_of_digits(n):
+    """Helper function to calculate the sum of the digits of an integer n."""
+    return sum(int(digit) for digit in str(n))
+
+def get_difference(numbers):
+    min_valid_number = float('inf')  # Initialize to positive infinity for comparison
+    max_valid_number = float('-inf')  # Initialize to negative infinity for comparison
+
+    for number in numbers:
+        if sum_of_digits(number) == 30:
+            if number < min_valid_number:
+                min_valid_number = number
+            if number > max_valid_number:
+                max_valid_number = number
+
+    # If no valid number is found, we return 0 or another appropriate response
+    if min_valid_number == float('inf') or max_valid_number == float('-inf'):
+        return 0
+
+    return max_valid_number - min_valid_number
+
+# Example usage:
+# import random
+# random_integers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_integers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 86.97 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Initialize with None, to handle the case when no valid number is found
+    min_valid_number = None
+    max_valid_number = None
+
+    for number in numbers:
+        num = number
+        digit_sum = 0
+
+        # Manually calculate the sum of digits to avoid the function call overhead
+        while num > 0:
+            digit_sum += num % 10
+            num //= 10
+
+        if digit_sum == 30:
+            if min_valid_number is None or number < min_valid_number:
+                min_valid_number = number
+            if max_valid_number is None or number > max_valid_number:
+                max_valid_number = number
+
+    # If no valid number is found, return 0
+    if min_valid_number is None or max_valid_number is None:
+        return 0
+
+    return max_valid_number - min_valid_number
+
+# Example usage:
+# import random
+# random_integers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_integers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 71.15 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Set initial extreme values far apart
+    min_valid_number = float('inf')
+    max_valid_number = float('-inf')
+
+    for number in numbers:
+        num = number
+        digit_sum = 0
+
+        # Calculate the sum of digits
+        while num > 0:
+            digit_sum += num % 10
+            num //= 10
+
+        # Check if the sum of digits equals 30
+        if digit_sum == 30:
+            if number < min_valid_number:
+                min_valid_number = number
+            if number > max_valid_number:
+                max_valid_number = number
+
+    # If no valid number is found, return 0
+    if min_valid_number == float('inf'):
+        return 0
+
+    return max_valid_number - min_valid_number
+
+# Example usage:
+# import random
+# random_integers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_integers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 59.37 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_valid_number = float('inf')
+    max_valid_number = float('-inf')
+
+    for number in numbers:
+        digit_sum = 0
+        num = number
+
+        # Efficient digit sum calculation
+        while num:
+            digit_sum += num % 10
+            num //= 10
+
+        if digit_sum == 30:
+            # Update min and max in a single line
+            min_valid_number = min(min_valid_number, number)
+            max_valid_number = max(max_valid_number, number)
+
+    # If no valid number is found, return 0
+    if min_valid_number == float('inf'):
+        return 0
+
+    return max_valid_number - min_valid_number
+
+# Example usage:
+# import random
+# random_integers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_integers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 42.69 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_valid_number = float('inf')
+    max_valid_number = float('-inf')
+
+    for number in numbers:
+        digit_sum = 0
+        temp = number
+
+        # Calculate sum of digits without using string conversions
+        while temp > 0:
+            digit_sum += temp % 10
+            if digit_sum > 30:  # Early exit if the digit sum exceeds 30
+                break
+            temp //= 10
+
+        if digit_sum == 30:
+            if number < min_valid_number:
+                min_valid_number = number
+            if number > max_valid_number:
+                max_valid_number = number
+
+    # If no valid number is found, return 0
+    if min_valid_number == float('inf'):
+        return 0
+
+    return max_valid_number - min_valid_number
+
+# Example usage:
+# import random
+# random_integers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_integers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 23.21 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_valid_number = float('inf')
+    max_valid_number = float('-inf')
+
+    for number in numbers:
+        digit_sum = 0
+        temp = number
+
+        # Calculate sum of digits without using string conversions
+        while temp > 0:
+            digit_sum += temp % 10
+            temp //= 10
+            if digit_sum > 30:  # Early exit if the digit sum exceeds 30
+                break
+
+        if digit_sum == 30:
+            if number < min_valid_number:
+                min_valid_number = number
+            if number > max_valid_number:
+                max_valid_number = number
+
+    # If no valid number is found, return 0
+    if min_valid_number == float('inf'):
+        return 0
+
+    return max_valid_number - min_valid_number
+
+# This early exit logging or debugging is essential if further optimization is crucial
+# for extensive benchmark testing
+# import random
+# random_integers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_integers))
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 6.52 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_valid_number = float('inf')
+    max_valid_number = float('-inf')
+
+    for number in numbers:
+        digit_sum = 0
+        temp = number
+
+        # Calculate sum of digits without using string conversions
+        while temp > 0:
+            digit_sum += temp % 10
+            temp //= 10
+            # Early exit if the digit sum exceeds 30
+            if digit_sum > 30:
+                break
+
+        # Only update min and max if we found a valid number
+        if digit_sum == 30:
+            if number < min_valid_number:
+                min_valid_number = number
+            if number > max_valid_number:
+                max_valid_number = number
+
+    # If no valid number is found, return 0
+    if min_valid_number == float('inf'):
+        return 0
+
+    return max_valid_number - min_valid_number
+
+# Example usage:
+# import random
+# random_integers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_integers))
+
+Time limit reached: 120 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    min_valid_number = float('inf')
+    max_valid_number = float('-inf')
+    inf = float('inf')
+
+    for number in numbers:
+        digit_sum = 0
+        n = number
+
+        # Calculate the sum of digits directly with optimizations
+        while n > 0:
+            digit_sum += n % 10
+            n //= 10
+            # Break early if the digit sum exceeds 30
+            if digit_sum > 30:
+                break
+
+        # Update min and max if digit sum is exactly 30
+        if digit_sum == 30:
+            if number < min_valid_number:
+                min_valid_number = number
+            if number > max_valid_number:
+                max_valid_number = number
+
+    # Return appropriate result if no valid number is found
+    if min_valid_number == inf:
+        return 0
+
+    return max_valid_number - min_valid_number
+
+# Example usage:
+# import random
+# random_integers = [random.randint(1, 100000) for _ in range(1000000)]
+# print(get_difference(random_integers))
+Solution saved to 2_inf_120_2.py
+
+Average time per generation: 16.04 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 47.15 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    def digit_sum(n):
+        """Helper function to calculate the sum of digits of a given number."""
+        return sum(int(digit) for digit in str(n))
+
+    # Step 1: Filter the numbers whose digit sum is 30
+    filtered_numbers = [num for num in numbers if digit_sum(num) == 30]
+
+    if not filtered_numbers:
+        # If there's no number with digit sum of 30, return None or appropriate value indicating the situation
+        return None
+
+    # Step 2: Find the smallest and largest numbers in the filtered list
+    min_number = min(filtered_numbers)
+    max_number = max(filtered_numbers)
+
+    # Step 3: Return the difference
+    return max_number - min_number
+
+# Example usage:
+# result = get_difference(your_list_of_1_million_random_integers)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 37.47 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_number = float('inf')
+    max_number = float('-inf')
+    found = False
+
+    for num in numbers:
+        digit_sum = sum(int(digit) for digit in str(num))
+
+        if digit_sum == 30:
+            found = True
+            if num < min_number:
+                min_number = num
+            if num > max_number:
+                max_number = num
+
+    if not found:
+        return None
+
+    return max_number - min_number
+
+# Example usage:
+# result = get_difference(your_list_of_1_million_random_integers)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 29.40 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    min_number = float('inf')
+    max_number = float('-inf')
+    found = False
+
+    for num in numbers:
+        # Instead of creating a list with all digits, use a generator expression.
+        digit_sum = sum(int(digit) for digit in str(num))
+
+        if digit_sum == 30:
+            found = True
+            # Simultaneously update min_number and max_number without separate checks.
+            min_number = min(min_number, num)
+            max_number = max(max_number, num)
+
+    if not found:
+        return None
+
+    return max_number - min_number
+
+# Example usage:
+# result = get_difference(your_list_of_1_million_random_integers)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 19.27 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Initialize min_number and max_number
+    min_number = float('inf')
+    max_number = float('-inf')
+
+    # Flag to check if any number with digit sum 30 was found
+    found = False
+
+    for num in numbers:
+        # Calculate digit sum using integer arithmetic
+        digit_sum = 0
+        temp = num
+        while temp > 0:
+            digit_sum += temp % 10
+            temp //= 10
+
+        # If the sum of digits is 30, update min and max variables
+        if digit_sum == 30:
+            found = True
+            if num < min_number:
+                min_number = num
+            if num > max_number:
+                max_number = num
+
+    # Return the difference or None if no valid number was found
+    return max_number - min_number if found else None
+
+# Example usage:
+# result = get_difference(your_list_of_1_million_random_integers)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 9.47 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Initialize min_number and max_number using None
+    min_number = None
+    max_number = None
+
+    for num in numbers:
+        # Calculate digit sum using integer arithmetic
+        digit_sum = 0
+        temp = num
+        while temp > 0:
+            digit_sum += temp % 10
+            temp //= 10
+
+        # If the sum of digits is 30, update min and max variables
+        if digit_sum == 30:
+            if min_number is None or num < min_number:
+                min_number = num
+            if max_number is None or num > max_number:
+                max_number = num
+
+    # Return the difference or None if no valid number was found
+    return (max_number - min_number) if min_number is not None else None
+
+# Example usage:
+# result = get_difference(your_list_of_1_million_random_integers)
+
+Time limit reached: 60 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    min_number = float('inf')
+    max_number = -float('inf')
+    found = False  # Flag to check if we found any number with digit sum 30
+
+    for num in numbers:
+        # Calculate digit sum using integer arithmetic
+        digit_sum = 0
+        temp = num
+        while temp > 0:
+            digit_sum += temp % 10
+            temp //= 10
+
+        # If the sum of digits is 30, update min and max variables
+        if digit_sum == 30:
+            found = True
+            if num < min_number:
+                min_number = num
+            if num > max_number:
+                max_number = num
+
+    # Return the difference, else None if no valid number was found
+    return (max_number - min_number) if found else None
+
+# Example usage:
+# result = get_difference(your_list_of_1_million_random_integers)
+Solution saved to 3_inf_60_2.py
+
+Average time per generation: 11.95 seconds
+
+    You are part of a team with other Python programmers. Work together to solve the problem.
+    Write Python code to solve this problem:
+
+Write a function `get_difference` that takes a list of 1 million random integers (each between 1 and 100,000) as input and returns an integer: the difference between the smallest and largest numbers in the list whose digits sum up to 30.
+
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 106.58 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def sum_of_digits(num):
+    """Helper function to calculate the sum of digits of a number."""
+    return sum(int(digit) for digit in str(num))
+
+def get_difference(numbers):
+    """Return the difference between the smallest and largest numbers whose digits sum up to 30."""
+    smallest = None
+    largest = None
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is not None and largest is not None:
+        return largest - smallest
+    else:
+        # If no number found with digits summing to 30, return 0 or another indication
+        return 0
+
+# Example usage:
+# Suppose 'random_numbers' is your list of 1 million random integers
+# random_numbers = [generate your list here]
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 92.50 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def sum_of_digits(num):
+    """Helper function to calculate the sum of digits of a number."""
+    s = 0
+    while num > 0:
+        s += num % 10
+        num //= 10
+    return s
+
+def get_difference(numbers):
+    """Return the difference between the smallest and largest numbers whose digits sum up to 30."""
+    smallest = float('inf')
+    largest = float('-inf')
+    found = False
+
+    for num in numbers:
+        if sum_of_digits(num) == 30:
+            found = True
+            if num < smallest:
+                smallest = num
+            if num > largest:
+                largest = num
+
+    if found:
+        return largest - smallest
+    else:
+        return 0
+
+# Example usage:
+# Suppose 'random_numbers' is your list of 1 million random integers
+# random_numbers = [generate your list here]
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 75.96 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    smallest = float('inf')
+    largest = float('-inf')
+    found = False
+
+    for num in numbers:
+        original_num = num
+        digit_sum = 0
+
+        # Inline sum of digits computation
+        while num > 0:
+            digit_sum += num % 10
+            num //= 10
+
+        if digit_sum == 30:
+            found = True
+            if original_num < smallest:
+                smallest = original_num
+            if original_num > largest:
+                largest = original_num
+
+        # We continue through all numbers as replacements might be
+        # or further checks may be necessary
+
+    if found:
+        return largest - smallest
+    else:
+        return 0
+
+# Example usage:
+# Suppose 'random_numbers' is your list of 1 million random integers
+# random_numbers = [your list of numbers here]
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 62.33 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    smallest = None
+    largest = None
+
+    for original_num in numbers:
+        num = original_num
+        digit_sum = 0
+
+        # Inline sum of digits computation
+        while num:
+            digit_sum += num % 10
+            num //= 10
+
+        if digit_sum == 30:
+            if smallest is None or original_num < smallest:
+                smallest = original_num
+            if largest is None or original_num > largest:
+                largest = original_num
+
+    # Compute the difference if we found any valid numbers
+    if smallest is not None and largest is not None:
+        return largest - smallest
+    else:
+        return 0
+
+# Example usage:
+# Suppose 'random_numbers' is your list of 1 million random integers
+# random_numbers = [your list of numbers here]
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 47.12 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Start with extreme values, so checks are quick and direct
+    smallest = float('inf')
+    largest = float('-inf')
+    found = False  # Track if we find any numbers with sum of digits = 30
+
+    for original_num in numbers:
+        num = original_num
+        digit_sum = 0
+
+        # Inline sum of digits computation
+        while num:
+            digit_sum += num % 10
+            num //= 10
+
+        if digit_sum == 30:
+            found = True
+            if original_num < smallest:
+                smallest = original_num
+            if original_num > largest:
+                largest = original_num
+
+    if found:
+        return largest - smallest
+    else:
+        return 0
+
+# Example usage (uncomment and adjust to use in a real situation):
+# random_numbers = [your list of numbers here]
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 35.19 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    # Filter out numbers whose digit sum is not 30 using a generator expression
+    filtered_numbers = (
+        num for num in numbers if sum(int(digit) for digit in str(num)) == 30
+    )
+
+    # Convert the generator to a list to allow single pass for min/max
+    filtered_list = list(filtered_numbers)
+
+    if not filtered_list:
+        # Return 0 if no numbers met the condition
+        return 0
+
+    smallest = min(filtered_list)
+    largest = max(filtered_list)
+
+    return largest - smallest
+
+# Example usage (uncomment and adjust to use in a real situation):
+# random_numbers = [your list of numbers here]
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 24.75 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    smallest = None
+    largest = None
+
+    for num in numbers:
+        digit_sum = sum(int(digit) for digit in str(num))
+
+        if digit_sum == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is not None and largest is not None:
+        return largest - smallest
+    else:
+        return 0
+
+# Example usage:
+# random_numbers = [your list of numbers here]
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 15.20 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    smallest = None
+    largest = None
+
+    for num in numbers:
+        # Calculate the sum of digits efficiently using divmod
+        digit_sum = 0
+        temp = num
+        while temp > 0:
+            temp, digit = divmod(temp, 10)
+            digit_sum += digit
+
+        if digit_sum == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is not None and largest is not None:
+        return largest - smallest
+    else:
+        return 0
+
+# Example usage:
+# random_numbers = [your list of numbers here]
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+
+        Here is the current Python solution proposed by your team:
+        Optimize it for faster execution.
+        Your team have 4.62 seconds remaining to deliver the final solution.
+
+        CURRENT SOLUTION:
+        def get_difference(numbers):
+    smallest = None
+    largest = None
+
+    for num in numbers:
+        # Sum digit calculation using a more Pythonic way with divmod
+        digit_sum = sum(int(digit) for digit in str(num))
+
+        if digit_sum == 30:
+            if smallest is None or num < smallest:
+                smallest = num
+            if largest is None or num > largest:
+                largest = num
+
+    if smallest is not None and largest is not None:
+        return largest - smallest
+    else:
+        return 0
+
+# This code assumes you have a list named 'random_numbers'
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+
+Time limit reached: 120 seconds. Stopping execution.
+Final Solution:
+def get_difference(numbers):
+    smallest = float('inf')
+    largest = -float('inf')
+
+    for num in numbers:
+        # Optimized sum of digits using arithmetic
+        original_num = num
+        digit_sum = 0
+        while num > 0:
+            digit_sum += num % 10
+            num //= 10
+
+        if digit_sum == 30:
+            if original_num < smallest:
+                smallest = original_num
+            if original_num > largest:
+                largest = original_num
+
+    if smallest != float('inf') and largest != -float('inf'):
+        return largest - smallest
+    else:
+        return 0
+
+# Test with an example list 'random_numbers'
+# difference = get_difference(random_numbers)
+# print("Difference:", difference)
+Solution saved to 3_inf_120_2.py
+
+Average time per generation: 12.09 seconds
+PS D:\dequi\repositories\llm-code-refinery>
