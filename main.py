@@ -152,6 +152,10 @@ def main(num_agents=2, iterations=5, time_limit=60, replicate=1):
 
 
 if __name__ == "__main__":
+    main(num_agents=1, iterations=3, time_limit=math.inf, replicate=2)
+    main(num_agents=2, iterations=10**18, time_limit=60, replicate=2)
+
+    """
     main(num_agents=1, iterations=3, time_limit=math.inf, replicate=1)
     main(num_agents=1, iterations=8, time_limit=math.inf, replicate=1)
     main(num_agents=2, iterations=3, time_limit=math.inf, replicate=1)
@@ -179,3 +183,4 @@ if __name__ == "__main__":
     main(num_agents=2, iterations=10**18, time_limit=120, replicate=2)
     main(num_agents=3, iterations=10**18, time_limit=60, replicate=2)
     main(num_agents=3, iterations=10**18, time_limit=120, replicate=2)
+    """

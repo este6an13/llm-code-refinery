@@ -1,41 +1,29 @@
-def digit_sum(n):
-    """Function to calculate the sum of digits of a number."""
-    total = 0
-    while n > 0:
-        total += n % 10
-        n //= 10
-    return total
-
-
 def get_difference(numbers):
-    min_val = float("inf")
-    max_val = float("-inf")
+    def digit_sum(n):
+        """Compute the sum of the digits of an integer n."""
+        return sum(int(digit) for digit in str(n))
 
-    for number in numbers:
-        if digit_sum(number) == 30:
-            if number < min_val:
-                min_val = number
-            if number > max_val:
-                max_val = number
-            # If we find both min and max as identical (highly unlikely but theoretically possible),
-            # we can choose to break if no further useful computation is possible.
-            if min_val < float("inf") and max_val > float("-inf"):
-                if min_val == max_val:
-                    break
+    # Initialize variables to store the min and max values
+    min_num = None
+    max_num = None
 
-    # If min and max have not been updated, return None
-    if min_val == float("inf") or max_val == float("-inf"):
+    # Single pass to find min and max numbers with digit sum of 30
+    for num in numbers:
+        if digit_sum(num) == 30:
+            if min_num is None or num < min_num:
+                min_num = num
+            if max_num is None or num > max_num:
+                max_num = num
+
+    # Return None if no valid numbers were found
+    if min_num is None:
         return None
 
-    return max_val - min_val
+    # Return the difference between max and min numbers found
+    return max_num - min_num
 
 
 # Example usage:
-import random
-
-# Generating a list of 1 million integers ranging from 1 to 100,000
-numbers = [random.randint(1, 100000) for _ in range(1000000)]
-
-# Using the function
-difference = get_difference(numbers)
-print(difference)
+# numbers = generate_large_input()  # Suppose this function generates the large list
+# difference = get_difference(numbers)
+# print(f"Difference: {difference}")
