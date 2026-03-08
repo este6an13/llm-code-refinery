@@ -10,6 +10,10 @@ This project explores how LLM agents collaborate to iteratively generate and opt
 
 **LLM Code Refinery** explores the capabilities of GPT-4o agents working individually and in teams to solve a defined programming task under different time and iteration constraints. The experiment simulates a collaborative coding environment where agents take turns refining each other’s solutions across multiple iterations.
 
+<p align="center">
+<img src="images/schematic-nano-banana-2.png" alt="Schematic of '🧪 Experimental Design for LLM Code Generation Evaluation' Project" width="600">
+</p>
+
 ### Experiment Design
 
 We varied two primary factors:
