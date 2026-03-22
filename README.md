@@ -4,6 +4,14 @@
 
 This project explores how LLM agents collaborate to iteratively generate and optimize code within a controlled experimental design. By varying the number of agents and the optimization strategy (iterations or time limit), we evaluate collaboration dynamics through verifiable rewards — specifically, whether generated programs execute correctly and how efficiently they run. Execution time serves as an objective, measurable signal of performance, allowing us to assess reliability without relying on subjective judgments. Although the statistical power achieved in this pilot was limited, the project demonstrates the potential of combining experimental design with verifiable evaluation criteria to rigorously measure LLM performance.
 
+> [!NOTE]
+> **Disclaimer - Historical Context (April 2025)**
+> This project was made in April 2025, when we still didn’t have coding agents like today’s Claude Code, Codex, etc (or they were just being released). I think reasoning models were just starting also. What now seems evident is that increasing iterations and thinking time improves code correctness and efficiency.
+>
+> This was an interesting idea at the time, but now the focus should be on real coding agents and on exploring more interesting and complex hypotheses. One idea I still find valuable was using rigorous statistical tests to show that one approach is better than another, something that, even today, is often lacking when comparing models and benchmarks.
+>
+> However, as we see in this project, one quickly runs into the issue that requiring a high number of replicates significantly increases the cost of these kinds of experiments.
+
 ---
 
 ## 📘 Project Overview
