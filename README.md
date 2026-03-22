@@ -151,6 +151,7 @@ This pilot study highlights the feasibility and potential of simulating collabor
 - **Low power (35%) limits the reliability** of current conclusions.
 - **Future experiments require 43+ replicates per treatment** to confidently detect modest improvements (~0.5s).
 - **Cost-effective scaling** will be crucial for more robust validation.
+- **Hypothesis Testing Results:** A highly significant interaction effect was found ($p = 0.002$) suggesting that a generous time limit (120s) produces the most performant code, while a generous iteration limit (8 turns) produces the slowest code. **Caveat:** Because the experiment's statistical power is currently very low (~35%), these findings must be interpreted with caution. This exciting preliminary trend exactly highlights the need to run future experiments with the recommended 43+ replicates to rigorously confirm these dynamics. See [HYPOTHESIS_RESULTS.md](HYPOTHESIS_RESULTS.md) for full details.
 - Agent collaboration shows promise, and future experiments could explore:
   - More diverse programming tasks
   - Agent memory and feedback loops

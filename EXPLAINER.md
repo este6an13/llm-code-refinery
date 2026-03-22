@@ -35,6 +35,12 @@ Finally, we have the Jupyter notebook that answers the big question: *“Were ou
 * This notebook runs a **Power Analysis**. In this pilot run, it found that the experiment's "statistical power" was only ~35%. That means the sample size is currently too small to be completely confident in the observed results.
 * It calculates that you’d need about **43 runs (replicates)** per setup to confidently prove that one AI strategy is 0.5 seconds faster than another.
 
+### 5. The Evaluator (`hypothesis_tests.py`)
+This script executes the formal hypothesis testing on the pilot data using an N-way ANOVA via `statsmodels`. 
+* It tests whether more agents, or specific constraint types drastically speed up code execution.
+* **The Output:** It found a highly significant finding showing that generous time limits improve AI code performance, while generous iteration limits hurt it. Full details are compiled in `HYPOTHESIS_RESULTS.md`.
+* **The Catch:** Because the overall statistical power is only about 35%, these findings should be interpreted cautiously. They perfectly illustrate *why* we need to scale up to 43+ replicates—to definitively prove if these early trends are robust.
+
 ---
 
 ## 📝 Summary
@@ -43,3 +49,4 @@ Finally, we have the Jupyter notebook that answers the big question: *“Were ou
 2. `measure.py` runs that code to check if it works and exactly how fast it is.
 3. `summarize.py` averages out the speed scores for easier reading.
 4. `power-analysis.ipynb` crunches the stats to tell us if the results are scientifically reliable based on our sample size.
+5. `hypothesis_tests.py` runs N-Way ANOVA tests to uncover significant interaction effects in the data (detailed in `HYPOTHESIS_RESULTS.md`).
